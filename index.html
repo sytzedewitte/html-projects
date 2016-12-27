@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <meta name="theme-color" content="#16191C">
+
+  <style>
+    body {
+      overflow: hidden;
+      -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
+                                  cursor: default;
+    }
+
+    #check {
+      position: absolute;
+      width: 80%;
+      top: 0px;
+      left: 0px;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 500%;
+      text-align: center;
+      padding-top: 20px;
+      border: none;
+      background: rgb(22,25,28);
+      margin: 0% 10%;
+      padding-top: 20%;
+    }
+
+    #extra {
+      position: absolute;
+      width: 80%;
+      top: 0px;
+      left: 0px;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 500%;
+      text-align: center;
+      padding-top: 20px;
+      border: none;
+      background: #303F9F;
+      margin: 0% 10%;
+      padding-top: 10%;
+      visibility: hidden;
+    }
+
+    #coords {
+      position: absolute;
+      width: 100%;
+      left: 0px;
+      bottom: 2%;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 225%;
+      color: rgb(242,245,248);
+      text-align: center;
+    }
+
+    #verder {
+      font-family: 'Montserrat', sans-serif;
+      position: absolute;
+      left: 25%;
+      bottom: 25%;
+      width: 50%;
+      padding: 2% 0%;
+      cursor: pointer;
+      background: #536DFE;
+      color: #B3E5FC;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+      transition: all ease 0.3s;
+      text-align: center;
+      font-size: 300%;
+    }
+    #verder:hover {
+      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+    }
+    #verder:active {
+      background: #334DDE;
+    }
+  </style>
+
+  <script>
+    var isVerder = false
+
+    function gaVerder() {
+      if (!isVerder) {
+        isVerder = true
+        document.getElementById('check').style.visibility = "hidden"
+        document.getElementById('coords').style.visibility = "visible"
+        document.getElementById('extra').style.visibility = "visible"
+        document.body.style.background = "#303F9F"
+        document.getElementsByName('theme-color')[0].content = "#3F51B5"
+        document.getElementById('verder').innerHTML = "← terug"
+
+        navigator.geolocation.watchPosition(geoSucces, geoError, {enableHighAccuracy:true,maximumAge:30000,timeout:27000})
+      } else {
+        isVerder = false
+        document.getElementById('check').style.visibility = "visible"
+        document.getElementById('coords').style.visibility = "visible"
+        document.getElementById('extra').style.visibility = "hidden"
+        document.body.style.background = "rgb(22,25,28)"
+        document.getElementsByName('theme-color')[0].content = "#16191C"
+        document.getElementById('verder').innerHTML = "verder →"
+      }
+    }
+
+    /*
+     *  LOCATIE
+     */
+
+     function geoSucces(position) {
+       $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address='+ position.coords.latitude +","+ position.coords.longitude +'&key=AIzaSyA_uqQ2c-rh0mdrUtveNjJTPdoSNSKRbCo', function(data) {
+         var obj = JSON.stringify(data, null, 2)
+         var gArr = $.parseJSON(obj)
+         document.getElementById('extra').innerHTML = "Je bent nu op " + gArr.results[0].formatted_address
+       })
+
+       if (isVerder) {
+         document.getElementById('coords').innerHTML = "lat: " + position.coords.latitude + ", lon: " + position.coords.longitude + "<br>nauwkeurigheid: " + position.coords.accuracy + "m"
+       }
+     }
+
+     function geoError() {
+       alert("error")
+     }
+
+     navigator.geolocation.watchPosition(geoSucces, geoError, {enableHighAccuracy:true,maximumAge:30000,timeout:27000})
+
+
+    /*
+     *  TAFEL
+     */
+
+    if(window.DeviceMotionEvent){
+      window.addEventListener("devicemotion", motion, false)
+    } else{
+      document.body.innerHTML = "DeviceMotionEvent wordt niet ondersteund door je browser"
+    }
+
+    var lastCoords = [0,0,0]
+    var antiBlink = new Date().getTime()
+    var isLongEnough = false
+
+    function motion(event) {
+      var isOnTable = false
+      var x = event.accelerationIncludingGravity.x
+      var y = event.accelerationIncludingGravity.y
+      var z = event.accelerationIncludingGravity.z
+
+      var t = new Date().getTime()
+
+      var diffX = Math.abs(x - lastCoords[0])
+      var diffY = Math.abs(y - lastCoords[1])
+      var diffZ = Math.abs(z - lastCoords[2])
+
+      if (diffX <= 0.05 && diffY <= 0.05 && diffZ <= 0.05) {
+        isOnTable = true
+      } else {
+        isOnTable = false
+      }
+
+      if (!isVerder) {
+        document.getElementById('coords').innerHTML = "x: " + x.toFixed(2) + ", y: " + y.toFixed(2) + ", z: " + z.toFixed(2) + "<br>t: " + t
+
+        if (isOnTable) {
+          if (!isLongEnough) {
+            isLongEnough = true
+            antiBlink = new Date().getTime()
+          }
+          if (t - antiBlink > 100) {
+            document.getElementById('check').style.background = "#4CAF50"
+            document.body.style.background = "#4CAF50"
+            document.getElementsByName('theme-color')[0].content = "#4CAF50"
+            document.getElementById('check').innerHTML = "Je telefoon ligt nu waarschijnlijk op een tafel"
+          }
+
+        } else {
+          isLongEnough = false
+          document.getElementById('check').style.background = "#F44336"
+          document.body.style.background = "#F44336"
+          document.getElementsByName('theme-color')[0].content = "#F44336"
+          document.getElementById('check').innerHTML = "Je hebt je telefoon nu in je handen"
+        }
+      }
+
+      if (t % 50 == 0) {
+        return lastCoords = [x, y, z]
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div id="check"></div>
+  <div id="extra"></div>
+  <div id="coords"></div>
+  <div onclick="gaVerder()" id="verder">verder →</div>
+</body>
+</html>
