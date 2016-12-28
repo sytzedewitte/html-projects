@@ -76,13 +76,15 @@
     
     function startStop() {
       if (!isWatchingPosition) {
-        var wpid = navigator.geolocation.watchPosition(geoSucces, geoError, {enableHighAccuracy:true,maximumAge:30000,timeout:27000})
         isWatchingPosition = true
+        var wpid = navigator.geolocation.watchPosition(geoSucces, geoError, {enableHighAccuracy:true,maximumAge:30000,timeout:27000})
+        
         document.getElementById('start').style.background = "#F44336"
         document.getElementById('start').innerHTML = "Stop"
       } else {
+        isWatchingPosition = false  
         navigator.geolocation.clearWatch(wpid)
-        isWatchingPosition = false        
+              
         document.getElementById('start').style.background = "#4CAF50"
         document.getElementById('start').innerHTML = "Start"
       }
