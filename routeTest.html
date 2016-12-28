@@ -9,6 +9,14 @@
     body { 
       background: #16191C;
       font-family: 'Montserrat', sans-serif;
+      -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
+                                  cursor: default;
     }
     
     ol {
@@ -57,7 +65,7 @@
         if (lastLocation == null) {
           lastLocation = gArr.results[0].formatted_address
         } else {
-          if (gArr.results[0].formatted_address == lastLocation) {
+          if (gArr.results[0].formatted_address != lastLocation) {
             document.getElementsByTagName('ol')[0].innerHTML += "<li>" + gArr.results[0].formatted_address + "</li>"
             lastLocation = gArr.results[0].formatted_address
           }
@@ -73,9 +81,11 @@
       if (!isWatchingPosition) {
         var wpid = navigator.geolocation.watchPosition(geoSucces, geoError, {enableHighAccuracy:true,maximumAge:30000,timeout:27000})
         isWatchingPosition = true
+        document.getElementById('start').innerHTML = "Stop"
       } else {
         navigator.geolocation.clearWatch(wpid)
         isWatchingPosition = false        
+        document.getElementById('start').innerHTML = "Start"
       }
     }
   </script>
@@ -83,9 +93,9 @@
 
 <body>
   <ol>
-    <h1>route:</h1>
+    <h1>Route:</h1>
     
   </ol>
-  <div onclick="startStop()" id="start">start</div>
+  <div onclick="startStop()" id="start">Start</div>
 </body>
 </html>
