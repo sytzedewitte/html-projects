@@ -38,18 +38,15 @@
       width: 100%;
       padding: 4% 0%;
       cursor: pointer;
-      background: #536DFE;
+      background: #4CAF50;
       color: #B3E5FC;
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
       transition: all ease 0.3s;
       text-align: center;
       font-size: 300%;
     }
-    #start:hover {
-      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
-    }
     #start:active {
-      background: #334DDE;
+      opacity: 0.9;
     }
   </style>
     
@@ -81,10 +78,12 @@
       if (!isWatchingPosition) {
         var wpid = navigator.geolocation.watchPosition(geoSucces, geoError, {enableHighAccuracy:true,maximumAge:30000,timeout:27000})
         isWatchingPosition = true
+        document.getElementById('start').style.background = "#F44336"
         document.getElementById('start').innerHTML = "Stop"
       } else {
         navigator.geolocation.clearWatch(wpid)
         isWatchingPosition = false        
+        document.getElementById('start').style.background = "#4CAF50"
         document.getElementById('start').innerHTML = "Start"
       }
     }
