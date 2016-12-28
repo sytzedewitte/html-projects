@@ -10,11 +10,35 @@
   </style>
 
   <script>
-    alert("hij doet het")
+    var lastLocation;
+    
+    function geoSucces(position) {
+      $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address='+ position.coords.latitude +","+ position.coords.longitude +'&key=AIzaSyA_uqQ2c-rh0mdrUtveNjJTPdoSNSKRbCo', function(data) {
+        var obj = JSON.stringify(data, null, 2)
+        var gArr = $.parseJSON(obj)
+        
+        if (lastLocation == null) {
+          lastLocation = gArr.results[0].formatted_address
+        } else {
+          if (gArr.results[0].formatted_address != lastLocation) {
+            document.getElementsByTagName('ol')[0].innerHTML += "<li>" + gArr.results[0].formatted_address + "</li>"
+            lastLocation = gArr.results[0].formatted_address
+          }
+        }
+      })
+    }
+    
+    function geoError() {
+      alert("Zet locatie aan op je telefoon.")
+    }
+    
+    navigator.geolocation.watchPosition(geoSucces, geoError, {enableHighAccuracy:true,maximumAge:30000,timeout:27000})
   </script>
 </head>
 
 <body>
- 
+  <ol>
+    
+  </ol>
 </body>
 </html>
