@@ -21,10 +21,33 @@
       margin: 0% 10%;
       padding-top: 10%;
     }
+    
+    #start {
+      font-family: 'Montserrat', sans-serif;
+      position: absolute;
+      left: 25%;
+      bottom: 25%;
+      width: 50%;
+      padding: 2% 0%;
+      cursor: pointer;
+      background: #536DFE;
+      color: #B3E5FC;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+      transition: all ease 0.3s;
+      text-align: center;
+      font-size: 300%;
+    }
+    #start:hover {
+      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+    }
+    #start:active {
+      background: #334DDE;
+    }
   </style>
     
   <script>
     var lastLocation;
+    var isWatchingPosition = false;
     
     function geoSucces(position) {
       $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address='+ position.coords.latitude +","+ position.coords.longitude +'&key=AIzaSyA_uqQ2c-rh0mdrUtveNjJTPdoSNSKRbCo', function(data) {
@@ -34,7 +57,7 @@
         if (lastLocation == null) {
           lastLocation = gArr.results[0].formatted_address
         } else {
-          if (gArr.results[0].formatted_address != lastLocation) {
+          if (gArr.results[0].formatted_address == lastLocation) {
             document.getElementsByTagName('ol')[0].innerHTML += "<li>" + gArr.results[0].formatted_address + "</li>"
             lastLocation = gArr.results[0].formatted_address
           }
@@ -46,13 +69,23 @@
       
     }
     
-    navigator.geolocation.watchPosition(geoSucces, geoError, {enableHighAccuracy:true,maximumAge:30000,timeout:27000})
+    function startStop() {
+      if (!isWatchingPosition) {
+        var wpid = navigator.geolocation.watchPosition(geoSucces, geoError, {enableHighAccuracy:true,maximumAge:30000,timeout:27000})
+        isWatchingPosition = true
+      } else {
+        navigator.geolocation.clearWatch(wpid)
+        isWatchingPosition = false        
+      }
+    }
   </script>
 </head>
 
 <body>
   <ol>
+    <h1>route:</h1>
     
   </ol>
+  <div onclick="startStop()" id="start">start</div>
 </body>
 </html>
