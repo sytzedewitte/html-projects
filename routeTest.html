@@ -68,7 +68,7 @@
           document.getElementsByTagName('ol')[0].innerHTML += "<li>" + gArr.results[0].formatted_address + "</li>"
           lastLocation = gArr.results[0].formatted_address
         } else {
-          if (gArr.results[0].formatted_address != lastLocation && isWatchingPosition == true) {
+          if (gArr.results[0].formatted_address == lastLocation && isWatchingPosition == true) {
             document.getElementsByTagName('ol')[0].innerHTML += "<li>" + gArr.results[0].formatted_address + "</li>"
             lastLocation = gArr.results[0].formatted_address
           }
