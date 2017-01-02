@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Color Generator</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+  <meta name="theme-color" content="#16191c">
+
+  <style>
+    body {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+
+    .noselect {
+      -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Chrome/Safari/Opera */
+         -khtml-user-select: none; /* Konqueror */
+           -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                      not supported by any browser */
+                                      cursor: default;
+    }
+
+    #d0 {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      background: rgb(22,25,28);
+      transition: 0.3 all ease;
+    }
+
+    #d1 {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 0%;
+      height: 0%;
+      background: blue;
+      transition: 0.3 all ease;
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      text-shadow: 0 8px 17px rgba(0, 0, 0, 0.2);
+      cursor: default;
+      position: absolute;
+      color: rgb(250,250,250);
+      width: 100%;
+      text-align: center;
+      top: 15%;
+      font-size: 30pt;
+      pointer-events: none;
+    }
+
+    h2 {
+      position: absolute;
+      top: calc(15% + 115px);
+      font-family: Montserrat, sans-serif;
+      font-size: 20pt;
+      text-align: center;
+      left: 50%;
+      transform: translate(-50%);
+      color: rgb(234, 234, 234);
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    }
+    h2:hover {
+      background: black;
+      color: white;
+      cursor: copy;
+    }
+
+    h3 {
+      position: absolute;
+      top: calc(15% + 160px);
+      font-family: Montserrat, sans-serif;
+      font-size: 20pt;
+      text-align: center;
+      left: 50%;
+      transform: translate(-50%);
+      color: rgb(234, 234, 234);
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    }
+    h3:hover {
+      background: black;
+      color: white;
+      cursor: copy;
+    }
+
+    #colorpicker {
+      background: transparent;
+      position: absolute;
+      left: 0px;
+      bottom: 0px;
+      width: 100%;
+      height: 10%;
+      transition: all ease 0.6s;
+    }
+
+    #colorpicker:hover {
+      background: white;
+      height: 40%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+      display: inline-block;
+    }
+
+    #colorpicker:hover > .range {
+      visibility: visible;
+    }
+
+    .range {
+      visibility: hidden;
+      background: black;
+      border-radius: 5px;
+      background: #FFFFFF;
+      margin: 8% 24px;
+      -webkit-appearance: none;
+      width: 25%;
+      height:2px;
+      background: black;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+
+    .range::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      width:12px;
+      height:12px;
+      border-radius: 100%;
+      background: black;
+      z-index:3;
+    }
+  </style>
+
+  <script>
+    /*document.onclick = function () {
+      document.getElementById('d0').style.background = "rgb(222,"+ document.getElementsByClassName('range')[1].value +",222)"
+    }*/
+
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF'.split('');
+      var color = '#';
+      for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        } : null;
+    }
+
+    function circleFx() {
+      document.body.style.background = rc;
+      var rc = getRandomColor();
+      var x = event.clientX
+      var y = event.clientY
+      var t = 350
+
+      if (x == null) {
+        x = window.innerWidth / 2
+        y = window.innerHeight / 2
+      }
+
+      document.getElementById('d1').style.left = x + "px"
+      document.getElementById('d1').style.top  = y + "px"
+      document.getElementById('d1').style.borderRadius = "50%"
+      document.getElementById('d1').style.background = rc;
+      document.getElementsByName('theme-color')[0].content = ""+rc;
+
+      $('#d1').animate({
+        width: "100%", height: "100%", left: "0px", top: "0px", borderRadius: "0px"
+      }, t)
+
+      setTimeout(function(){
+        document.getElementById('d0').style.background = rc;
+      }, t)
+
+      setTimeout(function() {
+        document.getElementById('d1').style.left = "0px"
+        document.getElementById('d1').style.top = "0px"
+        document.getElementById('d1').style.width = "0%"
+        document.getElementById('d1').style.height = "0%"
+        document.getElementById('d1').style.background = rc;
+        document.body.style.background = rc;
+      }, t+50)
+
+      document.getElementsByTagName('h2')[0].innerHTML = rc;
+      document.getElementsByTagName('h3')[0].innerHTML = 'rgb('+hexToRgb(rc).r +',' + hexToRgb(rc).g +',' +  hexToRgb(rc).b +')';
+    }
+  </script>
+</head>
+
+<body onload="circleFx()" onkeypress="circleFx()">
+  <div id="d0" class="noselect" onclick="circleFx()"></div>
+  <div id="d1" class="noselect"></div>
+  <h1>random color generator</h1>
+  <h2></h2>
+  <h3></h3>
+
+  <!---
+  <div id="colorpicker">
+    <input class="range" type="range" min="0" max="255" value="0" step="1" />
+    <input class="range" type="range" min="0" max="255" value="0" step="1" />
+    <input class="range" type="range" min="0" max="255" value="0" step="1" />
+  </div>
+  --->
+</body>
+</html>
