@@ -6,12 +6,11 @@
   <meta name="theme-color" content="#16191C">
   
   <script>           
-  function doOnOrientationChange() {
-    document.body.innerHTML = window.orientation
-  }
+    function doOnOrientationChange() {
+      document.body.innerHTML = event.orientation
+    }
 
-  window.addEventListener('orientationchange', doOnOrientationChange)
-  doOnOrientationChange()
+    window.addEventListener('orientationchange', doOnOrientationChange)
   </script>
 </head>
 
