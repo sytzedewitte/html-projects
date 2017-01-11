@@ -2,15 +2,76 @@
 <html>
 <head>
   <title>sdw7020: html pages</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+  <style>
+    body {
+      overflow: hidden;
+    }
+
+    div {
+      width: 100%;
+      height: 25%;
+    }
+
+    a {
+      color: rgb(222,225,228);
+      font-family: 'Montserrat', sans-serif;
+      position: absolute;
+      width: 20%;
+      vertical-align: middle;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 5%;
+      margin-left: 40%;
+      background: #212121;
+    }
+    a:visited {
+      color: rgb(222,225,228);
+      text-decoration: none;
+    }
+    a:active {
+      color: rgb(222,225,228);
+      text-decoration: none;
+    }
+
+    .phone {
+      background: #3F51B5;
+    }
+
+    .pc {
+      background: #607D8B;
+    }
+
+    #container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0%;
+      top: 0%;
+    }
+
+    #acc {
+      background: #9FBFEF;
+    }
+    #or {
+      background: #7F91F5;
+    }
+    #route {
+      background: #5F71D5;
+    }
+    #rcg {
+      background: #3F51B5;
+    }
+  </style>
 </head>
 
 <body>
-  phone:<br>
-  <a href="accTest.html">accTest.html</a><br>
-  <a href="orientationTest.html">orientationTest.html</a><br>
-  <a href="routeTest.html">routeTest.html</a><br>
-  <br>
-  pc:<br>
-  <a href="rcg.html">rcg.html</a><br>
+  <div id="container">
+    <div class="phone" id="acc"><a href="accTest.html">accTest.html</a></div>
+    <div class="phone" id="or"><a href="orientationTest.html">orientationTest.html</a></div>
+    <div class="phone" id="route"><a href="routeTest.html">routeTest.html</a></div>
+    <div class="pc" id="rcg"><a href="rcg.html">rcg.html</a></div>
+  </div>
 </body>
 </html>
