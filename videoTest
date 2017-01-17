@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0%;
+      top: 0%;
+      background: black;
+    }
+  </style>
+
+  <script>
+  (function () {
+  navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia);
+
+  navigator.getMedia(
+      // constraints
+      {video:true, audio:false},
+
+      // success callback
+      function (mediaStream) {
+          var video = document.getElementsByTagName('video')[0];
+          video.src = window.URL.createObjectURL(mediaStream);
+          alert(video.src)
+          video.play();
+      },
+      //handle error
+      function (error) {
+          alert(error);
+      })
+})();
+  </script>
+</head>
+<body>
+  <video></video>
+</body>
+</html>
