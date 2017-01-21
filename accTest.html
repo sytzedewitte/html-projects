@@ -126,7 +126,7 @@
        })
 
        if (isVerder) {
-         document.getElementById('coords').innerHTML = "lat: " + position.coords.latitude + ", lon: " + position.coords.longitude + "<br>nauwkeurigheid: " + Math.round(position.coords.accuracy) + "m<br><i><small>Gemaakt door sdw7020 \\_(ツ)_/¯</small></i>"
+         document.getElementById('coords').innerHTML = "lat: " + position.coords.latitude.toFixed(5) + ", lon: " + position.coords.longitude.toFixed(5) + "<br>nauwkeurigheid: " + Math.round(position.coords.accuracy) + "m<br><i><small>Gemaakt door sdw7020 \\_(ツ)_/¯</small></i>"
        }
      }
 
