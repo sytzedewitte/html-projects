@@ -163,7 +163,7 @@
       var diffY = Math.abs(y - lastCoords[1])
       var diffZ = Math.abs(z - lastCoords[2])
 
-      if (diffX <= 0.05 && diffY <= 0.05 && diffZ <= 0.05) {
+      if (diffX <= 0.1 && diffY <= 0.1 && diffZ <= 0.1) {
         isOnTable = true
       } else {
         isOnTable = false
@@ -193,7 +193,7 @@
         }
       }
 
-      if (t % 100 == 0) {
+      if (t % 80 == 0) {
         return lastCoords = [x, y, z]
       }
     }
