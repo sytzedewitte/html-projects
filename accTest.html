@@ -158,6 +158,7 @@
       var z = event.accelerationIncludingGravity.z
 
       var t = new Date().getTime()
+      var t2= new Date()
 
       var diffX = Math.abs(x - lastCoords[0])
       var diffY = Math.abs(y - lastCoords[1])
@@ -193,7 +194,7 @@
         }
       }
 
-      if (t % 50 == 0) {
+      if (t2.getTime() % 50 == 0) {
         return lastCoords = [x, y, z]
       }
     }
