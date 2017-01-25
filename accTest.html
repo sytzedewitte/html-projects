@@ -116,7 +116,7 @@
 
     /*
      *  LOCATIE
-     */
+     *
 
      function geoSucces(position) {
        $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address='+ position.coords.latitude +","+ position.coords.longitude +'&key=AIzaSyA_uqQ2c-rh0mdrUtveNjJTPdoSNSKRbCo', function(data) {
@@ -136,6 +136,7 @@
 
      navigator.geolocation.watchPosition(geoSucces, geoError, {enableHighAccuracy:true,maximumAge:30000,timeout:27000})
 
+    */
 
     /*
      *  TAFEL
@@ -205,6 +206,6 @@
   <div id="check"></div>
   <div id="extra"></div>
   <div id="coords"></div>
-  <div onclick="gaVerder()" id="verder">verder →</div>
+  <!--<div onclick="gaVerder()" id="verder">verder →</div>-->
 </body>
 </html>
