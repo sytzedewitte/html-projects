@@ -163,15 +163,17 @@
       var diffX = Math.abs(x - lastCoords[0])
       var diffY = Math.abs(y - lastCoords[1])
       var diffZ = Math.abs(z - lastCoords[2])
+      
+      var sen = 0.08
 
-      if (diffX <= 0.1 && diffY <= 0.1 && diffZ <= 0.1) {
+      if (diffX <= sen && diffY <= sen && diffZ <= sen) {
         isOnTable = true
       } else {
         isOnTable = false
       }
 
       if (!isVerder) {
-        document.getElementById('coords').innerHTML = "x: " + x.toFixed(2) + ", y: " + y.toFixed(2) + ", z: " + z.toFixed(2) + "<br>dx: " + diffX.toFixed(2) + ", dy: " + diffY.toFixed(2) + ", dz: " + diffZ.toFixed(2) + "<br>t: " + t + "<br><i><small>Gemaakt door sdw7020 \\_(ツ)_/¯</small></i>"
+        document.getElementById('coords').innerHTML = "S: " + sen + "<br>x: " + x.toFixed(2) + ", y: " + y.toFixed(2) + ", z: " + z.toFixed(2) + "<br>dx: " + diffX.toFixed(2) + ", dy: " + diffY.toFixed(2) + ", dz: " + diffZ.toFixed(2) + "<br>t: " + t + "<br><i><small>Gemaakt door sdw7020 \\_(ツ)_/¯</small></i>"
 
         if (isOnTable) {
           if (!isLongEnough) {
