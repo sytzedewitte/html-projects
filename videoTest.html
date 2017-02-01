@@ -61,6 +61,10 @@
     function init() {
         canvas = document.getElementById('can');
         ctx = canvas.getContext("2d");
+      
+        canvas.setAttribute('width', window.innerWidth);
+        canvas.setAttribute('heigth', window.innerHeigth);
+      
         w = canvas.width;
         h = canvas.height;
     
