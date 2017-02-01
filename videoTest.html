@@ -33,7 +33,6 @@
     
     #video {
       position: absolute;
-      width: 56.25%;
       height: 100%;
       left: 0%;
       top: 0%;
@@ -78,6 +77,7 @@
           bgVideo.play()
         
           var video = document.getElementById('video')
+          video.setAttribute('width', window.innerWidth * 0.5625);
           video.src = window.URL.createObjectURL(mediaStream)
           video.play()
       },
