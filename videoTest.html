@@ -2,7 +2,7 @@
 <html>
 <head>
   <style>
-    .noselect {
+    body {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
        -khtml-user-select: none; /* Konqueror HTML */
@@ -10,6 +10,7 @@
           -ms-user-select: none; /* Internet Explorer/Edge */
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome and Opera */
+      overflow: hidden;
     }
     
     video {
@@ -168,7 +169,7 @@
     }
   </script>
 </head>
-<body class="noselect" onload="init()">
+<body onload="init()">
   <video></video>
   
   <canvas id="can"></canvas>
@@ -179,7 +180,7 @@
   <div style="position:absolute;top:17%;right:4%;width:10px;height:10px;background:orange;" id="orange" onclick="color(this)"></div>
   <div style="position:absolute;top:17%;right:3%;width:10px;height:10px;background:black;" id="black" onclick="color(this)"></div>
   <div style="position:absolute;top:22%;right:3%;width:15px;height:15px;background:white;border:2px solid;" id="white" onclick="color(this)"></div>
-  <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+  <img id="canvasimg" style="position:absolute;top:0%;left:0%;" style="display:none;">
   <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;right:15%;">
   <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:55%;right:10%;">
 </body>
