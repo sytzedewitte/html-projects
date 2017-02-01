@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Snapchat Web (demo)</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
   <style>
     body {
     -webkit-touch-callout: none; /* iOS Safari */
@@ -38,6 +41,7 @@
       top: 0%;
       background: transparent;
       transition: all 0.5s ease;
+      font-family: 'Nunito', sans-serif;
     }
     #chatContainer:hover {
       left: 0%;
@@ -199,7 +203,10 @@
   <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;right:15%;">
   <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:55%;right:10%;">
   
-  <div id="chatContainer"></div>
+  <div id="chatContainer">
+    <h1>Chat</h1>
+    You are not logged in.
+  </div>
   <div id="storiesContainer"></div>
 </body>
 </html>
