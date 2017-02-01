@@ -16,7 +16,22 @@
       overflow: hidden;
     }
     
-    video {
+    #bgVideo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: -10%;
+      top: 0%;
+      z-index: -1000;
+       overflow: hidden;
+        -webkit-filter: blur(125px);
+      -moz-filter: blur(125px);
+      -o-filter: blur(125px);
+      -ms-filter: blur(125px);
+      filter: blur(125px);
+    }
+    
+    #video {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -58,7 +73,11 @@
       {video:true, audio:false},
       
       function (mediaStream) {
-          var video = document.getElementsByTagName('video')[0]
+          var bgVideo = document.getElementById('bgVideo')
+          bgVideo.src = window.URL.createObjectURL(mediaStream)
+          bgVideo.play()
+        
+          var video = document.getElementById('video')
           video.src = window.URL.createObjectURL(mediaStream)
           video.play()
       },
@@ -189,7 +208,8 @@
   </script>
 </head>
 <body onload="init()">
-  <video></video>
+  <video id="bgVideo"></video>
+  <video id="video"></video>
   
   <canvas id="can"></canvas>
   <div style="position:absolute;top:15%;right:3%;width:10px;height:10px;background:green;" id="green" onclick="color(this)"></div>
