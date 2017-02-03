@@ -165,7 +165,7 @@
       var diffY = Math.abs(y - lastCoords[1])
       var diffZ = Math.abs(z - lastCoords[2])
       
-      var sen = 0.08
+      var sen = 0.07
 
       if (diffX <= sen && diffY <= sen && diffZ <= sen) {
         isOnTable = true
@@ -198,8 +198,8 @@
       }
 
       var t2 = new Date().getTime()
-      if (t2 - t1 >= 80) {
-        t1 += 80
+      if (t2 - t1 >= 40) {
+        t1 += 40
         return lastCoords = [x, y, z]
       }
     }
