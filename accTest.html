@@ -150,6 +150,7 @@
 
     var lastCoords = [0,0,0]
     var antiBlink = new Date().getTime()
+    var t1 = new Date().getTime()
     var isLongEnough = false
 
     function motion(event) {
@@ -197,7 +198,8 @@
       }
 
       var t2 = new Date().getTime()
-      if (t2 % 80 == 0) {
+      if (t2 - t1 >= 80) {
+        t1 += 80
         return lastCoords = [x, y, z]
       }
     }
