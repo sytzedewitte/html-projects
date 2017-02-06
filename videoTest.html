@@ -14,6 +14,7 @@
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome and Opera */
       overflow: hidden;
+      background: black;
     }
     
     #bgVideo {
@@ -88,7 +89,7 @@
     })();
     
     document.getElementById('video').style.width = 9 * (window.innerHeight / 16)
-    document.getElementById('video').style.left = window.innerWidth/2 - (document.getElementById('video').style.width / 2)
+    document.getElementById('video').style.left = window.innerWidth/2 - ((9 * (window.innerHeight / 16)) / 2)
     
     var canvas, ctx, flag = false,
         prevX = 0,
