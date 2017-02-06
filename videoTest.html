@@ -45,6 +45,7 @@
       width: calc(8100% / 256) !important;
       top: 0%;
       height: 100%;
+      background: green;
     }
     
     #can {
@@ -217,7 +218,7 @@
 </head>
 <body onload="init()">
   <video id="bgVideo"></video>
-  <div id="vidContainer"><video id="video"></video></div>
+  <div id="vidContainer"><!---<video id="video"></video>---></div>
   
   <canvas id="can"></canvas>
   <div style="position:absolute;top:15%;right:3%;width:10px;height:10px;background:green;" id="green" onclick="color(this)"></div>
