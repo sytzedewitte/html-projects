@@ -33,10 +33,14 @@
     }
     
     #video {
-      position: absolute;
-      left: calc(17500% / 512);
       top: 0%;
       background: transparent;
+    }
+    
+    #vidContainer {
+      position: absolute;
+      left: calc(17500% / 512);
+      width: calc(8100% / 256);
     }
     
     #can {
@@ -77,7 +81,6 @@
           bgVideo.play()
         
           var video = document.getElementById('video')
-          video.setAttribute('width', (81 * window.innerWidth) / 256);
           video.setAttribute('height', window.innerHeigth);
           video.src = window.URL.createObjectURL(mediaStream)
           video.play()
@@ -210,7 +213,7 @@
 </head>
 <body onload="init()">
   <video id="bgVideo"></video>
-  <video id="video"></video>
+  <div id="vidContainer"><video id="video"></video></div>
   
   <canvas id="can"></canvas>
   <div style="position:absolute;top:15%;right:3%;width:10px;height:10px;background:green;" id="green" onclick="color(this)"></div>
