@@ -34,6 +34,8 @@
     
     #video {
       position: absolute;
+      left: 34.1796875%;
+      width: 31.640625%;
       top: 0%;
       height: 0%;
       background: transparent;
@@ -87,9 +89,6 @@
           alert(error)
       })
     })();
-    
-    document.getElementById('video').style.width = 9 * (window.innerHeight / 16)
-    document.getElementById('video').style.left = window.innerWidth/2 - ((9 * (window.innerHeight / 16)) / 2)
     
     var canvas, ctx, flag = false,
         prevX = 0,
