@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#16191C">
   
   <script>           
-    window.addEventListener("orientationchange", function() {
-      document.body.innerHTML = window.orientation
+    window.addEventListener("devicemotion", function() {
+      document.body.innerHTML = event.rotationRate
     }, false)
   </script>
 </head>
