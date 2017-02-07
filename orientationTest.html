@@ -21,8 +21,7 @@
   </style>
 
   <script>
-
-  document.addEventListener("mousemove", function() {
+  function calcGradient() {
     var e = window.event
 
     var posX = window.event.clientX - 0.5 * window.innerWidth
@@ -38,7 +37,10 @@
     }
     document.getElementById('box').style.background = "linear-gradient("+ deg +"deg, rgb(112, 75, 25), rgb(212, 175, 55)"
     //document.body.innerHTML = "x,y: "+posX +" , "+ posY+"<br>deg: " + deg
-  })
+  }
+
+  document.addEventListener("mousemove", calcGradient)
+  document.addEventListener("mousedown", calcGradient)
   </script>
 </head>
 
