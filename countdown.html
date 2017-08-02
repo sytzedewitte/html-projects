@@ -7,7 +7,6 @@
     html {
       height: 100%;
     }
-
     body {
       background: rgb(10, 10, 10);
       background-repeat: no-repeat;
@@ -16,15 +15,14 @@
       overflow: hidden;
       font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+      -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+      user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
-                                  cursor: default;
+      cursor: default;
     }
-
     #background {
       position: absolute;
       width: 100%;
@@ -32,20 +30,17 @@
       left: 0%;
       top: 0%;
     }
-
     #container {
       position: absolute;
       width: 100%;
       top: 23%;
     }
-
     h2 {
       margin: 0;
       color: rgba(255, 255, 255, 0.6);
       text-align: center;
       font-size: 50px;
     }
-
     h1 {
       color: rgba(255, 255, 255, 1);
       text-align: center;
@@ -56,22 +51,16 @@
 
   <script>
     var d = new Date()
-    var end = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 22, 00, 00)
-
-
-
+    var end = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 00, 00)
     function twoDigits(n){
       return n > 9 ? "" + n: "0" + n;
     }
-
     setInterval(function () {
       var left = end - new Date() + 1000
-
-      if (left >= 0) {
+      if (left >= 0 && d.getHours() >= 7) {
         var h = Math.floor(left / 3600000)
         var m = twoDigits(Math.floor(left / 60000 - h * 60))
         var s = twoDigits(Math.floor(left / 1000 - h * 3600 - m * 60))
-
         document.getElementsByTagName('h1')[0].innerHTML = h +":"+ m +":"+ s
         document.getElementById('background').style.background = "linear-gradient(rgb(10,10,10))"
         document.getElementsByTagName('h2')[0].innerHTML = "Time left to be productive today."
