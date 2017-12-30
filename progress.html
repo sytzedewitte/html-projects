@@ -8,6 +8,10 @@
   <style>
     @import url('https://fonts.googleapis.com/css?family=Patua+One');
 
+    body {
+      overflow: hidden;
+    }
+
     span {
       position: absolute;
       font-family: 'Patua One', cursive;
@@ -85,19 +89,42 @@
       bar.style.background = color
 
       txt.setAttribute("class", "txt")
-      txt.innerHTML = name
+      txt.innerHTML = timeToString(name)
 
       document.body.appendChild(bar)
       document.body.appendChild(txt)
     }
 
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"]
+    var dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+    "Saturday", "Sunday"]
+
+    function getOrdinalNum(n) {
+      return n + (n > 0 ? ['th', 'st', 'nd', 'rd'][(n > 3 && n < 21) || n % 10 > 3 ? 0 : n % 10] : '');
+    }
+
+    function timeToString(time) {
+      var d = new Date()
+
+      switch(time) {
+        case "hour": return ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2)
+        case "day": return dayNames[d.getDay()] + " the " + getOrdinalNum(d.getDate())
+        case "month": return "of " + monthNames[d.getMonth()]
+        case "year": return d.getFullYear()
+        default: return ""
+      }
+    }
+
     window.onload = function init() {
-      createBar("years", "#0166EE", "getTimeYear")
-      createBar("months", "#0074F1", "getTimeMonth")
-      createBar("days", "#0083F4", "getTimeDay")
-      createBar("hours", "#0091F8", "getTimeHours")
-      createBar("minutes", "#00A0FB", "getTimeMinutes")
-      createBar("seconds", "#00AFFF", "getTimeSeconds")
+      var d = new Date()
+
+      createBar("second", "#00AFFF", "getTimeSeconds")
+      createBar("minute", "#00A0FB", "getTimeMinutes")
+      createBar("hour", "#0091F8", "getTimeHours")
+      createBar("day", "#0083F4", "getTimeDay")
+      createBar("month", "#0074F1", "getTimeMonth")
+      createBar("year", "#0166EE", "getTimeYear")
     }
 
     function executeFunctionByName(functionName, context) {
@@ -117,6 +144,7 @@
       for (var i = 0; i < bars.length; i++) {
         var startTime = executeFunctionByName(bars[i].getAttribute("time"), window)
         var endTime = executeFunctionByName(bars[i].getAttribute("time"), window, 1)
+        var text = toString()
 
         bars[i].style.width = window.innerWidth * (new Date().getTime() - startTime) / (endTime - startTime) + "px"
         bars[i].style.height = window.innerHeight / bars.length + "px"
@@ -124,6 +152,8 @@
 
         txts[i].style.height = window.innerHeight / bars.length + "px"
         txts[i].style.top = i * bars[i].style.height.slice(0, -2) + "px"
+
+        txts[i].innerHTML = timeToString(bars[i].getAttribute("name"))
       }
     }, 16)
   </script>
