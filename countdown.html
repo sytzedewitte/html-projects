@@ -51,12 +51,14 @@
   </style>
 
   <script>
-    var d = new Date()
-    var end = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 00, 00)
     function twoDigits(n){
       return n > 9 ? "" + n: "0" + n;
     }
+    
     setInterval(function () {
+      var d = new Date()
+      var end = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 00, 00)
+      
       var left = end - new Date() + 1000
       if (left >= 0 && d.getHours() >= 7) {
         var h = Math.floor(left / 3600000)
